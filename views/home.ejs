@@ -10,10 +10,10 @@
 
     <% posts.forEach(post=> { %>
         <h1>
-            <%= post.postTitle %>
+            <%= post.title %>
         </h1>
         <p>
-            <%= post.postBody %>
+            <%= post.content %>
         </p>
         <% }) %>
             <%- include('partials/footer'); -%>
