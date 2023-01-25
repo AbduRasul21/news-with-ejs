@@ -21,6 +21,15 @@ app.use(express.static("public"));
 
 let posts = [];
 let requestTitle = "";
+let shortenPosts = []
+
+function truncateText(str,length) {
+  str.forEach(function (post) {
+    if (post.content.length<100) {
+      post.content.substring(0, length) + "...";
+    }
+  })
+}
 
 app.get("/", function (req, res) {
   res.render("home", {
@@ -55,10 +64,7 @@ app.get("/posts/:postName", (req, res) => {
   posts.forEach(function (post) {
     const storedTitle = _.lowerCase(post.title);
     if (requestTitle === storedTitle) {
-      console.log("Matches");
-      console.log(requestTitle + storedTitle);
-    } else {
-      console.log("not matches");
+      res.render("post", { title: post.title, content: post.content });
     }
   });
 });
